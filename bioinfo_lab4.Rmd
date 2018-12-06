@@ -1,0 +1,204 @@
+---
+title: "bioinfo_lab4"
+author: "Milda Poceviciute"
+date: "6 December 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+
+At first they import the data file of the Comparative Gene Expression Profiling of HUVEC and Ocular Vascular Endothelial Cells (Homo Sapiens) as a dataframe _phenodata_. They also include which target variables for which data set they will attempt to model.
+
+```{r, eval=FALSE}
+## ---- cache=TRUE---------------------------------------------------------
+x = getGEOSuppFiles("GSE20986")
+x
+## ------------------------------------------------------------------------
+untar("GSE20986/GSE20986_RAW.tar", exdir = "data")
+
+## ------------------------------------------------------------------------
+cels = list.files("data/", pattern = "[gz]")
+sapply(paste("data", cels, sep = "/"), gunzip)
+
+## ------------------------------------------------------------------------
+phenodata = matrix(rep(list.files("data"), 2), ncol =2)
+class(phenodata)
+phenodata <- as.data.frame(phenodata)
+colnames(phenodata) <- c("Name", "FileName")
+phenodata$Targets <- c("iris", 
+                       "retina", 
+                       "retina", 
+                       "iris", 
+                       "retina", 
+                       "iris", 
+                       "choroid", 
+                       "choroid", 
+                       "choroid", 
+                       "huvec", 
+                       "huvec", 
+                       "huvec")
+write.table(phenodata, "data/phenodata.txt", quote = F, sep = "\t", row.names = F)
+```
+
+Then the data is read again as AffyBatch object into variable _celfiles_, the data comes from a MicroArray of a company Affymetrix. Afterwards the box plots are produced which show the statistics of the 12 samples (minimum, first quartile, median, third quartile, and maximum). One of them is coloured by the samples.
+
+```{r}
+celfiles <- read.affy(covdesc = "phenodata.txt", path = "data")
+boxplot(celfiles)
+install.packages("RColorBrewer")
+library(RColorBrewer)
+cols = brewer.pal(8, "Set1")
+eset <- exprs(celfiles)
+samples <- celfiles$Targets
+colnames(eset)
+colnames(eset) <- samples
+
+boxplot(celfiles, col = cols, las = 2)
+
+```
+
+
+Then the distance matrix is created for the genome data from 12 samples, and the _hclus_ function is used to create cluster dendogram of the samples:
+
+```{r}
+distance <- dist(t(eset), method = "maximum")
+clusters <- hclust(distance)
+plot(clusters)
+```
+
+The genomic data is normalised and converted into ExpressionSet format, the bar plots of normalised and non-normalised data are plotted for comparison purposes:
+
+```{r}
+library(simpleaffy)
+library(affyPLM)
+celfiles.gcrma = gcrma(celfiles)
+par(mfrow=c(1,2))
+boxplot(celfiles.gcrma, col = cols, las = 2, main = "Post-Normalization");
+boxplot(celfiles, col = cols, las = 2, main = "Pre-Normalization")
+```
+
+
+And then the clusturing is performed on a normalise data set:
+
+```{r}
+distance2 <- dist(t(exprs(celfiles.gcrma)), method = "maximum")
+clusters2 <- hclust(distance2)
+plot(clusters2)
+
+```
+
+Here the design matrix is created which indicates what explanatory variables are present in each  of the 12 samples. This matrix is used to fit the linear regression model. Also a contrast matrix is created. It has three pairs of the explanatory variables, and each row indicates whether a single explanatory variable is present or not in each of the pairs. This is used in fitting  a microarray linear model. The result shows the resulting statistics for the top 100000 genes for huvec_choroid variable. 
+
+
+```{r}
+library(limma)
+
+phenodata
+samples <- as.factor(samples)
+design <- model.matrix(~0+samples)
+colnames(design)
+colnames(design) <- c("choroid", "huvec", "iris", "retina")
+design
+contrast.matrix = makeContrasts(
+    huvec_choroid = huvec - choroid, 
+    huvec_retina = huvec - retina, 
+    huvec_iris = huvec - iris, 
+    levels = design)
+
+fit = lmFit(celfiles.gcrma, design)
+huvec_fit <- contrasts.fit(fit, contrast.matrix)
+huvec_ebay <- eBayes(huvec_fit)
+
+library(hgu133plus2.db)
+library(annotate)
+probenames.list <- rownames(topTable(huvec_ebay, number = 100000))
+getsymbols <- getSYMBOL(probenames.list, "hgu133plus2")
+results <- topTable(huvec_ebay, number = 100000, coef = "huvec_choroid")
+results <- cbind(results, getsymbols)
+```
+
+
+
+Here the summary of the results are printed out, and the genes are grouped into three groups (a new variable "threshold" is introduced for that). Threshold is 1 if p-value is above $\alpha = 0.05$ significant level, the genes that have p-values below $\alpha = 0.05$ and logFC >5, and those that have p-values below $\alpha = 0.05$, and logFC >-5. logFC is a log2-fold-change corresponding to a contrast.
+
+
+```{r}
+summary(results)
+
+results$threshold <- "1"
+a <- subset(results, adj.P.Val < 0.05 & logFC > 5)
+results[rownames(a), "threshold"] <- "2"
+b <- subset(results, adj.P.Val < 0.05 & logFC < -5)
+results[rownames(b), "threshold"] <- "3"
+table(results$threshold)
+
+```
+
+The plot below illustrates the results:
+
+```{r}
+library(ggplot2)
+volcano <- ggplot(data = results, 
+                  aes(x = logFC, y = -1*log10(adj.P.Val), 
+                      colour = threshold, 
+                      label = getsymbols))
+
+volcano <- volcano + 
+    geom_point() + 
+    scale_color_manual(values = c("black", "red", "green"), 
+                       labels = c("Not Significant", "Upregulated", "Downregulated"), 
+                       name = "Key/Legend")
+
+volcano + 
+    geom_text(data = subset(results, logFC > 5 & -1*log10(adj.P.Val) > 5), aes(x = logFC, y = -1*log10(adj.P.Val), colour = threshold, label = getsymbols)  )
+
+```
+
+
+
+## Question 2
+
+```{r}
+
+data <- eset[,c(1,2,7,11)]
+colnames(data) <- c("iris","retina","choroid","huvec")
+plot(x=data[,1],y=data[,2],xlab="iris",ylab="retina")
+plot(x=data[,1],y=data[,3],xlab="iris",ylab="choroid")
+plot(x=data[,1],y=data[,4],xlab="iris",ylab="huvec")
+plot(x=data[,2],y=data[,3],xlab="retina",ylab="choroid")
+plot(x=data[,2],y=data[,4],xlab="retina",ylab="huvec")
+plot(x=data[,3],y=data[,4],xlab="choroid",ylab="huvec")
+# Normalised data
+comparison1 <- pairwise.comparison(celfiles.gcrma,"Targets",c("iris","retina"))
+comparison2 <- pairwise.comparison(celfiles.gcrma,"Targets",c("iris","choroid"))
+comparison3 <- pairwise.comparison(celfiles.gcrma,"Targets",c("iris","huvec"))
+comparison4 <- pairwise.comparison(celfiles.gcrma,"Targets",c("retina","huvec"))
+comparison5 <- pairwise.comparison(celfiles.gcrma,"Targets",c("retina","choroid"))
+comparison6 <- pairwise.comparison(celfiles.gcrma,"Targets",c("choroid","huvec"))
+
+plot(comparison1)
+plot(comparison2)
+plot(comparison3)
+plot(comparison4)
+plot(comparison5)
+plot(comparison6)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
