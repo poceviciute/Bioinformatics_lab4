@@ -61,6 +61,7 @@ plot(clusters)
 
 
 ## ------------------------------------------------------------------------
+
 library(simpleaffy)
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
@@ -73,9 +74,9 @@ boxplot(celfiles.gcrma, col = cols, las = 2, main = "Post-Normalization");
 boxplot(celfiles, col = cols, las = 2, main = "Pre-Normalization")
 dev.off()
 
-distance <- dist(t(exprs(celfiles.gcrma)), method = "maximum")
-clusters <- hclust(distance)
-plot(clusters)
+distance2 <- dist(t(exprs(celfiles.gcrma)), method = "maximum")
+clusters2 <- hclust(distance2)
+plot(clusters2)
 
 ## ------------------------------------------------------------------------
 library(limma)

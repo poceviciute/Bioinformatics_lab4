@@ -9,6 +9,18 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library(GEOquery)
+library(simpleaffy)
+library(RColorBrewer)
+library(affyPLM)
+library(limma)
+library(hgu133plus2.db)
+library(annotate)
+library(ggplot2)
+```
+
+
 ## Question 1
 
 At first they import the data file of the Comparative Gene Expression Profiling of HUVEC and Ocular Vascular Endothelial Cells (Homo Sapiens) as a dataframe _phenodata_. They also include which target variables for which data set they will attempt to model.
@@ -97,7 +109,7 @@ Here the design matrix is created which indicates what explanatory variables are
 ```{r}
 library(limma)
 
-phenodata
+
 samples <- as.factor(samples)
 design <- model.matrix(~0+samples)
 colnames(design)
@@ -162,8 +174,20 @@ volcano +
 
 ## Question 2
 
-```{r}
+Contrast matrices for the remaining pairs (DO WE NEED TO DO THIS???)
 
+```{r}
+contrast.matrix = makeContrasts(
+    huvec_choroid = huvec - choroid, 
+    huvec_retina = huvec - retina, 
+    huvec_iris = huvec - iris, 
+    levels = design)
+
+```
+
+
+```{r}
+# Not normalised data
 data <- eset[,c(1,2,7,11)]
 colnames(data) <- c("iris","retina","choroid","huvec")
 plot(x=data[,1],y=data[,2],xlab="iris",ylab="retina")
@@ -189,14 +213,99 @@ plot(comparison6)
 ```
 
 
+The dendograms and heatmaps are produced for both: raw data cluster analysis and the normalised data cluster analysis.
+
+```{r}
+library("RColorBrewer")
+library("gplots")
+plot(clusters)
+colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+dist_mat <- as.matrix(distance)
+# Heatmap of the raw data
+heatmap.2( dist2_mat, Rowv=as.dendrogram(clusters),
+          symm=TRUE, trace="none", col=colors,
+          margins=c(2,10), labCol=FALSE )
+plot(clusters2)
+# Heatmap of the normalised data
+dist2_mat <- as.matrix(distance2)
+heatmap.2( dist2_mat, Rowv=as.dendrogram(clusters2),
+          symm=TRUE, trace="none", col=colors,
+          margins=c(2,10), labCol=FALSE )
+```
 
 
+## QUestion 3
+
+The genes are grouped into three groups that contains genes that have:
+*   p-value above $\alpha = 0.05$ significant level (insignificant)
+*   p-values below $\alpha = 0.05$ and logFC >5 (Upregulated)
+*   p-values below $\alpha = 0.05$, and logFC >-5 (Downregulated)
+
+logFC is a log2-fold-change corresponding to a contrast.
+
+```{r}
+## huvec-retina
+results2 <- topTable(huvec_ebay, number = 100000, coef = "huvec_retina")
+results2 <- cbind(results2, getsymbols)
+
+results2$threshold <- "1"
+a <- subset(results2, adj.P.Val < 0.05 & logFC > 5)
+results2[rownames(a), "threshold"] <- "2"
+b <- subset(results2, adj.P.Val < 0.05 & logFC < -5)
+results2[rownames(b), "threshold"] <- "3"
+table(results2$threshold)
+
+## huvec-iris
+results3 <- topTable(huvec_ebay, number = 100000, coef = "huvec_iris")
+results3 <- cbind(results3, getsymbols)
+
+results3$threshold <- "1"
+a <- subset(results3, adj.P.Val < 0.05 & logFC > 5)
+results3[rownames(a), "threshold"] <- "2"
+b <- subset(results3, adj.P.Val < 0.05 & logFC < -5)
+results3[rownames(b), "threshold"] <- "3"
+table(results3$threshold)
+```
+
+Vulcano plot for the huvec-retina pair:
+
+```{r}
+library(ggplot2)
+volcano <- ggplot(data = results2, 
+                  aes(x = logFC, y = -1*log10(adj.P.Val), 
+                      colour = threshold, 
+                      label = getsymbols))
+
+volcano <- volcano + 
+    geom_point() + 
+    scale_color_manual(values = c("black", "red", "green"), 
+                       labels = c("Not Significant", "Upregulated", "Downregulated"), 
+                       name = "Key/Legend")
+
+volcano + 
+    geom_text(data = subset(results2, logFC > 5 & -1*log10(adj.P.Val) > 5), aes(x = logFC, y = -1*log10(adj.P.Val), colour = threshold, label = getsymbols)  )
+
+```
 
 
+Vulcano plot for the huvec-iris pair:
 
+```{r}
+volcano <- ggplot(data = results3, 
+                  aes(x = logFC, y = -1*log10(adj.P.Val), 
+                      colour = threshold, 
+                      label = getsymbols))
 
+volcano <- volcano + 
+    geom_point() + 
+    scale_color_manual(values = c("black", "red", "green"), 
+                       labels = c("Not Significant", "Upregulated", "Downregulated"), 
+                       name = "Key/Legend")
 
+volcano + 
+    geom_text(data = subset(results3, logFC > 5 & -1*log10(adj.P.Val) > 5), aes(x = logFC, y = -1*log10(adj.P.Val), colour = threshold, label = getsymbols)  )
 
+```
 
 
 
