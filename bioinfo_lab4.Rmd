@@ -59,12 +59,13 @@ write.table(phenodata, "data/phenodata.txt", quote = F, sep = "\t", row.names = 
 Then the data is read again as AffyBatch object into variable _celfiles_, the data comes from a MicroArray of a company Affymetrix. Afterwards the box plots are produced which show the statistics of the 12 samples (minimum, first quartile, median, third quartile, and maximum). One of them is coloured by the samples.
 
 ```{r}
+library(simpleaffy)
+library(affy)
 celfiles <- read.affy(covdesc = "phenodata.txt", path = "data")
 boxplot(celfiles)
-install.packages("RColorBrewer")
 library(RColorBrewer)
 cols = brewer.pal(8, "Set1")
-eset <- exprs(celfiles)
+eset <- affy::exprs(celfiles)
 samples <- celfiles$Targets
 colnames(eset)
 colnames(eset) <- samples
@@ -97,7 +98,7 @@ boxplot(celfiles, col = cols, las = 2, main = "Pre-Normalization")
 And then the clusturing is performed on a normalise data set:
 
 ```{r}
-distance2 <- dist(t(exprs(celfiles.gcrma)), method = "maximum")
+distance2 <- dist(t(affy::exprs(celfiles.gcrma)), method = "maximum")
 clusters2 <- hclust(distance2)
 plot(clusters2)
 
@@ -150,7 +151,7 @@ table(results$threshold)
 
 ```
 
-The plot below illustrates the results:
+The plot below illustrates the results. The downregulated genes are created by the process when a cell decreases the quantity of a cellular component (such as RNA or protein) in response to an external stimulus. The upregulated genes are greated by a reversed process.
 
 ```{r}
 library(ggplot2)
@@ -308,6 +309,16 @@ volcano +
 ```
 
 
+## Question 4
 
+
+```{r}
+# significant genes
+
+sig1 <- unique (subset(results, threshold %in% c(2,3))$getsymbols)
+sig2 <- unique (subset(results2, threshold %in% c(2,3))$getsymbols)
+sig3 <- unique (subset(results3, threshold %in% c(2,3))$getsymbols)
+all_significant = unique(c( as.character(sig1), as.character(sig2), as.character(sig3)))
+```
 
 
