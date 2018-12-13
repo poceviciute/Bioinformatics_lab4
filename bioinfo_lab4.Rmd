@@ -329,11 +329,8 @@ This gene is a member of the Antp homeobox family and encodes a protein with a h
 This gene is expressed in kidney, colon, fat tissue, urinary bladder, small intestine and 10 more tissues
 
 *   IL1RL1:
-The protein encoded by this gene is a member of the interleukin 1 receptor family. Studies of the similar gene in mouse suggested that this receptor can be induced by proinflammatory stimuli, and may be involved in the function of helper T cells. This gene, interleukin 1 receptor, type I (IL1R1), interleukin 1 receptor, type II (IL1R2) and interleukin 1 receptor-like 2 (IL1RL2) form a cytokine receptor gene cluster in a region mapped to chromosome 2q12. Alternative splicing of this gene results in multiple transcript variants.
+This gene, that is found on human Chromosome 2, is enconding a protein thta is a member of the interleukin 1 receptor family. The gene itself is part of the Toll-like receptors superfamily which is known to play an important role in the human innate immune system. Mutations in this gene have been linked to atopic dermatitis and asthma, while it is also involved in the progression of some cardiac diseases. The protein encoded by this gene is an indicator of the severity or presence of cardiatic diseases. The gene is expressed in placenta, kidney, lung, gal bladder and adrenal tissues.
 
-
-Mutations in this gene have been linked to atopic dermatitis and asthma. The protein encoded by this gene serves as a cardiac biomarker.
-It is expressed in placenta, kidney, lung, gali blader and adrenal tissues.
 
 *   HOXA5:
 In vertebrates, the genes encoding the class of transcription factors called homeobox genes are found in clusters named A, B, C, and D on four separate chromosomes. Expression of these proteins is spatially and temporally regulated during embryonic development. This gene is part of the A cluster on chromosome 7 and encodes a DNA-binding transcription factor which may regulate gene expression, morphogenesis, and differentiation. Methylation of this gene may result in the loss of its expression and, since the encoded protein upregulates the tumor suppressor p53, this protein may play an important role in tumorigenesis.
@@ -343,140 +340,149 @@ It is expressed in adrenal, lung, kidney, fat and 5 more tissues.
 
 https://en.wikipedia.org/wiki/HOXA5
 
-Gene Ontology terms associated with each geen:
+*Gene Ontology terms associated with each gene:*
 
-*   HOXB7:
+*HOXB7:*
 
-Molecular function	
-. DNA binding
-. sequence-specific DNA binding
-. transcription factor activity, sequence-specific DNA binding
-. transcriptional activator activity, RNA polymerase II core promoter proximal region sequence-specific binding
-. RNA polymerase II core promoter proximal region sequence-specific DNA binding
-. protein binding
-. RNA polymerase II transcription factor activity, sequence-specific DNA binding
-. RNA polymerase II distal enhancer sequence-specific DNA binding
-. transcription factor activity, RNA polymerase II distal enhancer sequence-specific binding
-. transcriptional activator activity, RNA polymerase II transcription regulatory region sequence-specific binding
-Cellular component	. cell nucleus
-Biological process	. embryonic skeletal system morphogenesis
-. pattern specification process
-. skeletal system development
-. respiratory system process
-. regulation of transcription, DNA-templated
-. multicellular organism growth
-. lung development
-. trachea morphogenesis
-. positive regulation of receptor biosynthetic process
-. bronchiole development
-. cell-cell signaling involved in mammary gland development
-. regulation of mammary gland epithelial cell proliferation
-. mammary gland alveolus development
-. lung goblet cell differentiation
-. transcription, DNA-templated
-. mammary gland epithelial cell differentiation
-. negative regulation of erythrocyte differentiation
-. respiratory gaseous exchange
-. trachea cartilage morphogenesis
-. embryonic skeletal system development
-. morphogenesis of an epithelium
-. multicellular organism development
-. thyroid gland development
-. lobar bronchus epithelium development
-. mesenchymal-epithelial cell signaling
-. positive regulation of apoptotic process
-. intestinal epithelial cell maturation
-. negative regulation of angiogenesis
-. cartilage morphogenesis
-. lung alveolus development
-. lung-associated mesenchyme development
-. epithelial tube branching involved in lung morphogenesis
-. cell migration
-. positive regulation of myeloid cell differentiation
-. anterior/posterior pattern specification
-. positive regulation of transcription from RNA polymerase II promoter
-. transcription from RNA polymerase II promoter
+_Molecular function_
+* DNA binding
+* sequence-specific DNA binding
+* transcription factor activity, sequence-specific DNA binding
+* transcriptional activator activity, RNA polymerase II core promoter proximal region sequence-specific binding
+* RNA polymerase II core promoter proximal region sequence-specific DNA binding
+* protein binding
+* RNA polymerase II transcription factor activity, sequence-specific DNA binding
+* RNA polymerase II distal enhancer sequence-specific DNA binding
+* transcription factor activity, RNA polymerase II distal enhancer sequence-specific binding
+* transcriptional activator activity, RNA polymerase II transcription regulatory region sequence-specific binding
+_Cellular component_	
+* cell nucleus
+_Biological process_	
+* embryonic skeletal system morphogenesis
+* pattern specification process
+* skeletal system development
+* respiratory system process
+* regulation of transcription, DNA-templated
+* multicellular organism growth
+* lung development
+* trachea morphogenesis
+* positive regulation of receptor biosynthetic process
+* bronchiole development
+* cell-cell signaling involved in mammary gland development
+* regulation of mammary gland epithelial cell proliferation
+* mammary gland alveolus development
+* lung goblet cell differentiation
+* transcription, DNA-templated
+* mammary gland epithelial cell differentiation
+* negative regulation of erythrocyte differentiation
+* respiratory gaseous exchange
+* trachea cartilage morphogenesis
+* embryonic skeletal system development
+* morphogenesis of an epithelium
+* multicellular organism development
+* thyroid gland development
+* lobar bronchus epithelium development
+* mesenchymal-epithelial cell signaling
+* positive regulation of apoptotic process
+* intestinal epithelial cell maturation
+* negative regulation of angiogenesis
+* cartilage morphogenesis
+* lung alveolus development
+* lung-associated mesenchyme development
+* epithelial tube branching involved in lung morphogenesis
+* cell migration
+* positive regulation of myeloid cell differentiation
+* anterior/posterior pattern specification
+* positive regulation of transcription from RNA polymerase II promoter
+* transcription from RNA polymerase II promoter
 
-source (https://en.wikipedia.org/wiki/HOXA5)
+source (https://en*wikipedia*org/wiki/HOXA5)
 
-*   IL1RL1: 
+*IL1RL1:* 
 
-Molecular function	
-. interleukin-33 receptor activity
-. interleukin-1 receptor activity
-. cytokine receptor activity
-. protein binding
-. signal transducer activity, downstream of receptor
-. interleukin-33 binding
-Cellular component	. integral component of membrane
-. external side of plasma membrane
-. membrane
-. extracellular region
-. plasma membrane
-. extracellular matrix
-Biological process	. negative regulation of T-helper 1 type immune response
-. positive regulation of inflammatory response
-. negative regulation of interferon-gamma production
-. positive regulation of macrophage activation
-. negative regulation of I-kappaB kinase/NF-kappaB signaling
-. positive regulation of chemokine secretion
-. signal transduction
-. immune response
-. positive regulation of interleukin-5 production
-. interleukin-33-mediated signaling pathway
+_Molecular function_	
+* interleukin-33 receptor activity
+* interleukin-1 receptor activity
+* cytokine receptor activity
+* protein binding
+* signal transducer activity, downstream of receptor
+* interleukin-33 binding
+_Cellular component_	
+* integral component of membrane
+* external side of plasma membrane
+* membrane
+* extracellular region
+* plasma membrane
+* extracellular matrix
+_Biological process_	
+* negative regulation of T-helper 1 type immune response
+* positive regulation of inflammatory response
+* negative regulation of interferon-gamma production
+* positive regulation of macrophage activation
+* negative regulation of I-kappaB kinase/NF-kappaB signaling
+* positive regulation of chemokine secretion
+* signal transduction
+* immune response
+* positive regulation of interleukin-5 production
+* interleukin-33-mediated signaling pathway
 
 source (https://en.wikipedia.org/wiki/IL1RL1)
 
-*   HOXA5:
+*HOXA5:*
 
-Molecular function	. DNA binding
-. sequence-specific DNA binding
-. transcription factor activity, sequence-specific DNA binding
-. transcriptional activator activity, RNA polymerase II core promoter proximal region sequence-specific binding
-. RNA polymerase II core promoter proximal region sequence-specific DNA binding
-. protein binding
-. RNA polymerase II transcription factor activity, sequence-specific DNA binding
-. RNA polymerase II distal enhancer sequence-specific DNA binding
-. transcription factor activity, RNA polymerase II distal enhancer sequence-specific binding
-. transcriptional activator activity, RNA polymerase II transcription regulatory region sequence-specific binding
-Cellular component	. cell nucleus
-Biological process	. embryonic skeletal system morphogenesis
-. pattern specification process
-. skeletal system development
-. respiratory system process
-. regulation of transcription, DNA-templated
-. multicellular organism growth
-. lung development
-. trachea morphogenesis
-. positive regulation of receptor biosynthetic process
-. bronchiole development
-. cell-cell signaling involved in mammary gland development
-. regulation of mammary gland epithelial cell proliferation
-. mammary gland alveolus development
-. lung goblet cell differentiation
-. transcription, DNA-templated
-. mammary gland epithelial cell differentiation
-. negative regulation of erythrocyte differentiation
-. respiratory gaseous exchange
-. trachea cartilage morphogenesis
-. embryonic skeletal system development
-. morphogenesis of an epithelium
-. multicellular organism development
-. thyroid gland development
-. lobar bronchus epithelium development
-. mesenchymal-epithelial cell signaling
-. positive regulation of apoptotic process
-. intestinal epithelial cell maturation
-. negative regulation of angiogenesis
-. cartilage morphogenesis
-. lung alveolus development
-. lung-associated mesenchyme development
-. epithelial tube branching involved in lung morphogenesis
-. cell migration
-. positive regulation of myeloid cell differentiation
-. anterior/posterior pattern specification
-. positive regulation of transcription from RNA polymerase II promoter
-. transcription from RNA polymerase II promoter
+_Molecular function_	
+* DNA binding
+* sequence-specific DNA binding
+* transcription factor activity, sequence-specific DNA binding
+* transcriptional activator activity, RNA polymerase II core promoter proximal region sequence-specific binding
+* RNA polymerase II core promoter proximal region sequence-specific DNA binding
+* protein binding
+* RNA polymerase II transcription factor activity, sequence-specific DNA binding
+* RNA polymerase II distal enhancer sequence-specific DNA binding
+* transcription factor activity, RNA polymerase II distal enhancer sequence-specific binding
+* transcriptional activator activity, RNA polymerase II transcription regulatory region sequence-specific binding
+_Cellular component_	
+* cell nucleus
+_Biological process_	
+* embryonic skeletal system morphogenesis
+* pattern specification process
+* skeletal system development
+* respiratory system process
+* regulation of transcription, DNA-templated
+* multicellular organism growth
+* lung development
+* trachea morphogenesis
+* positive regulation of receptor biosynthetic process
+* bronchiole development
+* cell-cell signaling involved in mammary gland development
+* regulation of mammary gland epithelial cell proliferation
+* mammary gland alveolus development
+* lung goblet cell differentiation
+* transcription, DNA-templated
+* mammary gland epithelial cell differentiation
+* negative regulation of erythrocyte differentiation
+* respiratory gaseous exchange
+* trachea cartilage morphogenesis
+* embryonic skeletal system development
+* morphogenesis of an epithelium
+* multicellular organism development
+* thyroid gland development
+* lobar bronchus epithelium development
+* mesenchymal-epithelial cell signaling
+* positive regulation of apoptotic process
+* intestinal epithelial cell maturation
+* negative regulation of angiogenesis
+* cartilage morphogenesis
+* lung alveolus development
+* lung-associated mesenchyme development
+* epithelial tube branching involved in lung morphogenesis
+* cell migration
+* positive regulation of myeloid cell differentiation
+* anterior/posterior pattern specification
+* positive regulation of transcription from RNA polymerase II promoter
+* transcription from RNA polymerase II promoter
+
+As we can see from the lists of the GO above, all three genes are involved in protein binding. Protein binding is the ability of the proteins to form bonds with other substances, commonly this refers to the drugs binding to the proteins in blood. Hence, all of them play a role into how drugs and human bodies interact (they can enhance or detract the drug performances).
 
 
 
