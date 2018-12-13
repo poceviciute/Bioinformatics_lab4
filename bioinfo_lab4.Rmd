@@ -325,18 +325,18 @@ as.character(common_genes)[2:length(common_genes)]
 ```
 
 *   HOXB7: 
-This gene is a member of the Antp homeobox family and encodes a protein with a homeobox DNA-binding domain. It is included in a cluster of homeobox B genes located on chromosome 17. The encoded nuclear protein functions as a sequence-specific transcription factor that is involved in cell proliferation and differentiation. Increased expression of this gene is associated with some cases of melanoma and ovarian carcinoma.
-This gene is expressed in kidney, colon, fat tissue, urinary bladder, small intestine and 10 more tissues
+The HOXB7 gene encodes a protein with a homeobox DNA-binding domain. It is a member of the Antp homeobox family and is included in a cluster of homeobox B genes that are located on chromosome 17. The encoded protein works as a transcription factor and is involved in cell proliferation and differentiation. Increased expression of HOXB7 has been associated with cases of melanoma and ovarian cancer. The gene is expressed in several tissues, including (but not limited to) kidney, colon, small intestine, urinary bladder, and fat tissue.
+
+https://www.ncbi.nlm.nih.gov/gene/3217
 
 *   IL1RL1:
 This gene, that is found on human Chromosome 2, is enconding a protein thta is a member of the interleukin 1 receptor family. The gene itself is part of the Toll-like receptors superfamily which is known to play an important role in the human innate immune system. Mutations in this gene have been linked to atopic dermatitis and asthma, while it is also involved in the progression of some cardiac diseases. The protein encoded by this gene is an indicator of the severity or presence of cardiatic diseases. The gene is expressed in placenta, kidney, lung, gal bladder and adrenal tissues.
 
 
 *   HOXA5:
-In vertebrates, the genes encoding the class of transcription factors called homeobox genes are found in clusters named A, B, C, and D on four separate chromosomes. Expression of these proteins is spatially and temporally regulated during embryonic development. This gene is part of the A cluster on chromosome 7 and encodes a DNA-binding transcription factor which may regulate gene expression, morphogenesis, and differentiation. Methylation of this gene may result in the loss of its expression and, since the encoded protein upregulates the tumor suppressor p53, this protein may play an important role in tumorigenesis.
 
- 
-It is expressed in adrenal, lung, kidney, fat and 5 more tissues.
+
+HOXA5 is a gene that is part of the A cluster on chromosome 7 and encodes the Homeobox Hox-A5 protein. It encodes a DNA-binding transcription factor that regulates gene expression, morphogenesis, and differentiation. Since the protein that HOXA5 encodes upregulates a tumor supressor, the protein may be important for tumor formation. HoxA5 is suppressed in acute myeloid leukemia. The gene is expressed in several tissues, for example, adrenal, lung, kidney, and fat.
 
 https://en.wikipedia.org/wiki/HOXA5
 
