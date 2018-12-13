@@ -95,7 +95,7 @@ boxplot(celfiles, col = cols, las = 2, main = "Pre-Normalization")
 ```
 
 
-And then the clusturing is performed on a normalise data set:
+And then the clustering is performed on a normalize data set:
 
 ```{r}
 distance2 <- dist(t(affy::exprs(celfiles.gcrma)), method = "maximum")
@@ -151,7 +151,7 @@ table(results$threshold)
 
 ```
 
-The plot below illustrates the results. The downregulated genes are created by the process when a cell decreases the quantity of a cellular component (such as RNA or protein) in response to an external stimulus. The upregulated genes are greated by a reversed process.
+The plot below illustrates the results. The down-regulated genes are created by the process when a cell decreases the quantity of a cellular component (such as RNA or protein) in response to an external stimulus. The up-regulated genes are created by a reversed process.
 
 ```{r}
 library(ggplot2)
@@ -234,13 +234,56 @@ heatmap.2( dist2_mat, Rowv=as.dendrogram(clusters2),
           margins=c(2,10), labCol=FALSE )
 ```
 
+MA-plots were made for each pair both before and after normalization.
+
+```{r}
+library(preprocessCore)
+#1=iris, 2=retina
+#7=choroid, huvec=10
+ir <- which(colnames(eset)=="iris")[1]
+ret <- which(colnames(eset)=="retina")[1]
+cho <- which(colnames(eset)=="choroid")[1]
+huv <- which(colnames(eset)=="huvec")[1]
+log2eset <- log2(eset)
+# Normalization
+eset_norm<- exprs(celfiles.gcrma)
+colnames(eset_norm) <- samples
+log2eset_norm <- log2(eset_norm)
+
+par(mfrow=c(2,2))
+#ir, ret
+ma.plot(rowMeans(log2eset[,c(ir,ret)]), log2eset[,ir]-log2eset[,ret], main="Pre-norm (ir,ret)", cex=1)
+ma.plot(rowMeans(log2eset_norm[,c(ir, ret)]), log2eset_norm[,ir]-log2eset_norm[,ret], main="Post-norm (ir,ret)",cex=1)
+
+#ir, cho
+ma.plot(rowMeans(log2eset[,c(ir,cho)]), log2eset[,ir]-log2eset[,cho], main="Pre-norm (ir,cho)", cex=1)
+ma.plot(rowMeans(log2eset_norm[,c(ir, cho)]), log2eset_norm[,ir]-log2eset_norm[,cho], main="Post-norm (ir,cho)",cex=1)
+
+#ir, huv
+ma.plot(rowMeans(log2eset[,c(ir,huv)]), log2eset[,ir]-log2eset[,huv], main="Pre-norm (ir,huv)", cex=1)
+ma.plot(rowMeans(log2eset_norm[,c(ir, huv)]), log2eset_norm[,ir]-log2eset_norm[,huv], main="Post-norm (ir,huv)",cex=1)
+
+#ret, cho
+ma.plot(rowMeans(log2eset[,c(ret,cho)]), log2eset[,ret]-log2eset[,cho], main="Pre-norm (ret,cho)", cex=1)
+ma.plot(rowMeans(log2eset_norm[,c(ret, cho)]), log2eset_norm[,ret]-log2eset_norm[,cho], main="Post-norm (ret,cho)",cex=1)
+
+#ret, huv
+ma.plot(rowMeans(log2eset[,c(ret,huv)]), log2eset[,ret]-log2eset[,huv], main="Pre-norm (ret,huv)", cex=1)
+ma.plot(rowMeans(log2eset_norm[,c(ret, huv)]), log2eset_norm[,ret]-log2eset_norm[,huv], main="Post-norm (ret,huv)",cex=1)
+
+#cho, huv
+ma.plot(rowMeans(log2eset[,c(cho,huv)]), log2eset[,cho]-log2eset[,huv], main="Pre-norm (cho, huv)", cex=1)
+ma.plot(rowMeans(log2eset_norm[,c(cho, huv)]), log2eset_norm[,cho]-log2eset_norm[,huv], main="Post-norm (cho, huv)",cex=1)
+
+```
+
 
 ## QUestion 3
 
 The genes are grouped into three groups that contains genes that have:
 *   p-value above $\alpha = 0.05$ significant level (insignificant)
-*   p-values below $\alpha = 0.05$ and logFC >5 (Upregulated)
-*   p-values below $\alpha = 0.05$, and logFC >-5 (Downregulated)
+*   p-values below $\alpha = 0.05$ and logFC >5 (Up-regulated)
+*   p-values below $\alpha = 0.05$, and logFC >-5 (Down-regulated)
 
 logFC is a log2-fold-change corresponding to a contrast.
 
@@ -330,13 +373,13 @@ The HOXB7 gene encodes a protein with a homeobox DNA-binding domain. It is a mem
 https://www.ncbi.nlm.nih.gov/gene/3217
 
 *   IL1RL1:
-This gene, that is found on human Chromosome 2, is enconding a protein thta is a member of the interleukin 1 receptor family. The gene itself is part of the Toll-like receptors superfamily which is known to play an important role in the human innate immune system. Mutations in this gene have been linked to atopic dermatitis and asthma, while it is also involved in the progression of some cardiac diseases. The protein encoded by this gene is an indicator of the severity or presence of cardiatic diseases. The gene is expressed in placenta, kidney, lung, gal bladder and adrenal tissues.
+This gene, that is found on human Chromosome 2, is encoding a protein that is a member of the interleukin 1 receptor family. The gene itself is part of the Toll-like receptors super family which is known to play an important role in the human innate immune system. Mutations in this gene have been linked to atopic dermatitis and asthma, while it is also involved in the progression of some cardiac diseases. The protein encoded by this gene is an indicator of the severity or presence of cardiatic diseases. The gene is expressed in placenta, kidney, lung, gal bladder and adrenal tissues.
 
 
 *   HOXA5:
 
 
-HOXA5 is a gene that is part of the A cluster on chromosome 7 and encodes the Homeobox Hox-A5 protein. It encodes a DNA-binding transcription factor that regulates gene expression, morphogenesis, and differentiation. Since the protein that HOXA5 encodes upregulates a tumor supressor, the protein may be important for tumor formation. HoxA5 is suppressed in acute myeloid leukemia. The gene is expressed in several tissues, for example, adrenal, lung, kidney, and fat.
+HOXA5 is a gene that is part of the A cluster on chromosome 7 and encodes the Homeobox Hox-A5 protein. It encodes a DNA-binding transcription factor that regulates gene expression, morphogenesis, and differentiation. Since the protein that HOXA5 encodes up-regulates a tumor suppressor, the protein may be important for tumor formation. HoxA5 is suppressed in acute myeloid leukemia. The gene is expressed in several tissues, for example, adrenal, lung, kidney, and fat.
 
 https://en.wikipedia.org/wiki/HOXA5
 
